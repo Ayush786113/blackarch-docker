@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 # Install SSH server
-apt update && apt -y install openssh-server && apt -y install openssh-client
+RUN apt update && apt -y install openssh-server && apt -y install openssh-client
 
 # Set root password (replace 'your_password' with your desired password)
 RUN echo 'root:sudo' | chpasswd
