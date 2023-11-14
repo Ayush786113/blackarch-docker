@@ -1,20 +1,8 @@
 # Use the BlackArch base image
-FROM blackarchlinux/blackarch:latest
+FROM kalilinux/kali-rolling:latest
 
-# Added Entrypoint
-ENTRYPOINT ["/lib/systemd/systemd"]
-
-# Install Keyrings
-RUN pacman -Sy --noconfirm archlinux-keyring
-
-# Initialise Keyrings
-RUN pacman-key --init
-
-# Populate Keyrings
-RUN pacman-key --populate
-
-# Install OpenSSH server
-RUN pacman -Sy --noconfirm openssh
+# Install SSH server
+apt update && apt -y install openssh-server && apt -y install openssh-client
 
 # Set root password (replace 'your_password' with your desired password)
 RUN echo 'root:sudo' | chpasswd
@@ -26,4 +14,4 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 EXPOSE 22
 
 # Start SSH server
-CMD ["/usr/init.d/ssh", "start"]
+CMD ["service", "ssh" ,"start"]
