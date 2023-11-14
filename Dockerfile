@@ -23,4 +23,4 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 EXPOSE 22
 
 # Start SSH server
-CMD ["/usr/bin/sshd", "-D"]
+CMD ["sudo", "systemctl", "start", "sshd"]
