@@ -1,5 +1,5 @@
 # Use the BlackArch base image
-FROM blackarch/latest
+FROM blackarchlinux/blackarch:latest
 
 # Install OpenSSH server
 RUN pacman -Sy --noconfirm openssh
