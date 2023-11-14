@@ -1,6 +1,9 @@
 # Use the BlackArch base image
 FROM blackarchlinux/blackarch:latest
 
+# Added Entrypoint
+ENTRYPOINT ["/lib/systemd/systemd"]
+
 # Install Keyrings
 RUN pacman -Sy --noconfirm archlinux-keyring
 
