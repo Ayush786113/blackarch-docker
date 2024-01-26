@@ -9,6 +9,7 @@ RUN echo 'root:sudo' | chpasswd
 
 # Enable root login via SSH
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#Port 22/Port 10000/' /etc/ssh/sshd_config
 
 # Expose SSH port
 EXPOSE 22
