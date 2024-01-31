@@ -1,18 +1,16 @@
-# Use the BlackArch base image
-FROM kalilinux/kali-rolling:latest
+# Use a base image that supports systemd, for example, Ubuntu
+FROM ubuntu:latest
 
-# Install SSH server
-RUN apt update && apt -y install openssh-server && apt -y install openssh-client
-
-# Set root password (replace 'your_password' with your desired password)
-RUN echo 'root:sudo' | chpasswd
-
-# Enable root login via SSH
-RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -i 's/#Port 22/Port 10000/' /etc/ssh/sshd_config
-
-# Expose SSH port
+# Install necessary packages
+RUN apt-get update && \
+apt-get install -y shellinabox && \
+apt-get install -y systemd && \
+apt-get clean && \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN echo 'root:root' | chpasswd
+# Expose the web-based terminal port
+EXPOSE 4200
 EXPOSE 22
 
-# Start SSH server
-CMD ["service", "ssh" ,"start"]
+# Start shellinabox
+CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
