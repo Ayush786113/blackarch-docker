@@ -1,5 +1,5 @@
 # Use a base image that supports systemd, for example, Ubuntu
-FROM ubuntu:latest
+FROM kalilinux/kali-rolling
 
 # Install necessary packages
 RUN apt-get update && \
